@@ -3,17 +3,19 @@ import React, { useState } from 'react';
 
 const HomeScreen = () => {
   const watches = [
-    { id: '1', name: 'Rolex Submariner', price: 8000, image: require('../images/download.jpeg') },
-    { id: '2', name: 'Omega Seamaster', price: 5500, image: require('../images/down.jpeg') },
-    { id: '3', name: 'Tag Heuer Monaco', price: 3200, image: require('../images/shop.webp') },
-    { id: '4', name: 'Patek Philippe Nautilus', price: 15000, image: require('../images/bros.webp') },
-    { id: '5', name: 'Audemars Piguet Royal Oak', price: 20000, image: require('../images/man.jpeg') },
-    { id: '6', name: 'Cartier Tank', price: 2500, image: require('../images/wwwww.jpeg') },
+    { id: '1', name: 'Rolex Submariner', price: 8000, description: 'A luxury diving watch with a rich history.', image: require('../images/download.jpeg') },
+    { id: '2', name: 'Omega Seamaster', price: 5500, description: 'A high-performance watch with a connection to James Bond.', image: require('../images/down.jpeg') },
+    { id: '3', name: 'Tag Heuer Monaco', price: 3200, description: 'A square-shaped watch with a motorsport legacy.', image: require('../images/shop.webp') },
+    { id: '4', name: 'Patek Philippe Nautilus', price: 15000, description: 'An iconic luxury watch with a unique design.', image: require('../images/bros.webp') },
+    { id: '5', name: 'Audemars Piguet Royal Oak', price: 20000, description: 'A distinguished watch known for its octagonal bezel.', image: require('../images/man.jpeg') },
+    { id: '6', name: 'Cartier Tank', price: 2500, description: 'A stylish and timeless rectangular watch.', image: require('../images/wwwww.jpeg') },
   ];
 
   const [cart, setCart] = useState([]);
   const [cartVisible, setCartVisible] = useState(false);
   const [paymentVisible, setPaymentVisible] = useState(false);
+  const [selectedWatch, setSelectedWatch] = useState(null); // State for the selected watch to display details
+  const [detailsVisible, setDetailsVisible] = useState(false); // State to control the visibility of the details modal
 
   const addToCart = (item) => {
     setCart([...cart, item]);
@@ -40,6 +42,12 @@ const HomeScreen = () => {
     clearCart();
   };
 
+  // Show the watch details modal
+  const handleWatchClick = (watch) => {
+    setSelectedWatch(watch);
+    setDetailsVisible(true);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.headline}>Find Your Suitable Watch</Text>
@@ -55,7 +63,9 @@ const HomeScreen = () => {
           <View style={styles.watchContainer}>
             <Image source={item.image} style={styles.watchImage} />
             <View style={styles.watchInfo}>
-              <Text style={styles.watchName}>{item.name}</Text>
+              <TouchableOpacity onPress={() => handleWatchClick(item)}>
+                <Text style={styles.watchName}>{item.name}</Text>
+              </TouchableOpacity>
               <Text style={styles.watchPrice}>${item.price}</Text>
             </View>
             <TouchableOpacity style={styles.addToCartButton} onPress={() => addToCart(item)}>
@@ -100,6 +110,21 @@ const HomeScreen = () => {
         </View>
       </Modal>
 
+      {/* Watch Details Modal */}
+      <Modal visible={detailsVisible} animationType="fade" transparent={true}>
+        <View style={styles.modalContainer}>
+          <View style={styles.modalContent}>
+            <Text style={styles.modalTitle}>{selectedWatch?.name}</Text>
+            <Image source={selectedWatch?.image} style={styles.watchImage} />
+            <Text style={styles.watchPrice}>${selectedWatch?.price}</Text>
+            <Text style={styles.watchDescription}>{selectedWatch?.description}</Text>
+            <TouchableOpacity style={styles.closeButton} onPress={() => setDetailsVisible(false)}>
+              <Text style={styles.buttonText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
+
       {/* Payment Modal */}
       <Modal visible={paymentVisible} animationType="fade" transparent={true}>
         <View style={styles.modalContainer}>
@@ -129,148 +154,156 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#1C1C1C", // Dark background for luxury
     padding: 20,
   },
   headline: {
     fontSize: 36,
-    fontWeight: 'bold',
-    color: '#333',
-    textAlign: 'center',
+    fontWeight: "bold",
+    color: "#FFD700", // Gold for a premium touch
+    textAlign: "center",
     marginVertical: 20,
-    textTransform: 'uppercase',
-    letterSpacing: 2,
+    textTransform: "uppercase",
+    letterSpacing: 3,
   },
   searchBar: {
-    height: 45,
-    borderColor: '#2196F3',
+    height: 50,
+    borderColor: "#FFD700", // Gold border for elegance
     borderWidth: 2,
     borderRadius: 25,
     paddingHorizontal: 15,
-    backgroundColor: '#FFFFFF',
-    marginBottom: 20,
+    backgroundColor: "#333", // Dark input background
+    color: "#FFF",
     fontSize: 16,
+    marginBottom: 20,
   },
   watchList: {
     marginTop: 20,
   },
   watchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#FFFFFF',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#2C2C2C", // Sleek dark card
     padding: 15,
     marginBottom: 20,
     borderRadius: 15,
-    elevation: 5,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 5 },
-    shadowOpacity: 0.1,
-    shadowRadius: 5,
+    shadowOpacity: 0.2,
+    shadowRadius: 10,
+    elevation: 5,
   },
   watchImage: {
     width: 80,
     height: 80,
     borderRadius: 40,
     marginRight: 15,
+    borderWidth: 2,
+    borderColor: "#FFD700", // Gold border
   },
   watchInfo: {
     flex: 1,
   },
   watchName: {
     fontSize: 20,
-    fontWeight: 'bold',
-    color: '#333',
+    fontWeight: "bold",
+    color: "#FFF", // White text for contrast
   },
   watchPrice: {
     fontSize: 18,
-    color: '#FF5722',
+    color: "#FFD700", // Gold for price
     marginTop: 5,
   },
   addToCartButton: {
-    backgroundColor: '#2196F3',
+    backgroundColor: "#FFD700", // Gold button
     padding: 10,
     borderRadius: 12,
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 2,
+    elevation: 3,
   },
   buttonText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
-    textAlign: 'center',
+    color: "#1C1C1C", // Dark text on gold
+    fontWeight: "bold",
+    textAlign: "center",
   },
   viewCartButton: {
-    backgroundColor: '#FF5722',
+    backgroundColor: "#FFD700", // Gold button
     padding: 15,
     borderRadius: 25,
-    alignItems: 'center',
+    alignItems: "center",
     marginTop: 25,
+    elevation: 5,
   },
   viewCartText: {
-    color: '#FFFFFF',
-    fontWeight: 'bold',
+    color: "#1C1C1C", // Dark text on gold
+    fontWeight: "bold",
     fontSize: 18,
   },
   modalContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.7)", // Semi-transparent black overlay
   },
   modalContent: {
-    backgroundColor: '#FFF',
+    backgroundColor: "#2C2C2C",
     padding: 20,
     borderRadius: 15,
-    width: '80%',
+    width: "80%",
+    alignItems: "center",
   },
   modalTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: "bold",
+    color: "#FFD700", // Gold for titles
     marginBottom: 15,
-    textAlign: 'center',
+  },
+  watchDescription: {
+    color: "#FFF",
+    fontSize: 16,
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  totalText: {
+    fontSize: 18,
+    color: "#FFF",
+    marginBottom: 15,
+  },
+  paymentOption: {
+    fontSize: 18,
+    color: "#FFD700",
+    marginBottom: 10,
   },
   cartItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginBottom: 15,
   },
   cartImage: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 10,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 15,
   },
   cartText: {
+    color: "#FFF",
     fontSize: 16,
-    flex: 1,
-  },
-  totalText: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginVertical: 15,
-    textAlign: 'center',
   },
   buyButton: {
-    backgroundColor: '#4CAF50',
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: "#FFD700",
+    padding: 10,
+    borderRadius: 12,
+    marginTop: 15,
   },
   clearButton: {
-    backgroundColor: '#FF5722',
-    padding: 12,
-    borderRadius: 10,
-    marginBottom: 10,
+    backgroundColor: "#D32F2F", // Red for clear
+    padding: 10,
+    borderRadius: 12,
+    marginTop: 10,
   },
   closeButton: {
-    backgroundColor: '#1E90FF',
-    padding: 12,
-    borderRadius: 10,
-  },
-  paymentOption: {
-    fontSize: 20,
-    color: '#333',
-    paddingVertical: 10,
-    textAlign: 'center',
+    backgroundColor: "#555", // Dark gray for close
+    padding: 10,
+    borderRadius: 12,
+    marginTop: 10,
   },
 });

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, Animated, LinearGradient } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Animated } from 'react-native';
 
 const AboutScr = () => {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
@@ -7,7 +7,7 @@ const AboutScr = () => {
   React.useEffect(() => {
     Animated.timing(fadeAnim, {
       toValue: 1,
-      duration: 1500,
+      duration: 2000,
       useNativeDriver: true,
     }).start();
   }, [fadeAnim]);
@@ -16,9 +16,9 @@ const AboutScr = () => {
     <ScrollView contentContainerStyle={styles.container}>
       {/* Header Section with Fade-In Animation */}
       <Animated.View style={[styles.header, { opacity: fadeAnim }]}>
-        <Text style={styles.title}>✨ About Luxury Timepieces ✨</Text>
+        <Text style={styles.title}>✨ Luxury Timepieces ✨</Text>
         <Text style={styles.subtitle}>
-          Redefining Elegance with Timeless Craftsmanship
+          *Exquisite Craftsmanship, Unrivaled Elegance*
         </Text>
       </Animated.View>
 
@@ -26,38 +26,46 @@ const AboutScr = () => {
       <View style={styles.card}>
         <Text style={styles.sectionTitle}>🌟 Our Mission</Text>
         <Text style={styles.description}>
-          At Luxury Timepieces, we bring you the finest selection of high-end
-          watches that blend precision, elegance, and craftsmanship. Each watch
-          in our collection represents the pinnacle of artistry and innovation.
+          At **Luxury Timepieces**, we bring you a curated selection of elite
+          timepieces that embody the essence of precision, artistry, and
+          sophistication. Each watch represents the pinnacle of horological
+          excellence, carefully selected to resonate with your impeccable taste.
         </Text>
       </View>
 
       {/* Features Section */}
       <View style={[styles.card, styles.highlightCard]}>
-        <Text style={[styles.sectionTitle, styles.highlightTitle]}>💎 What We Offer</Text>
+        <Text style={[styles.sectionTitle, styles.highlightTitle]}>
+          💎 Why Luxury Timepieces?
+        </Text>
+        <Text style={styles.description}>
+          Our exclusive collection offers:
+        </Text>
         <View style={styles.bulletPoints}>
-          <Text style={styles.bulletPoint}>✔️ Exclusive and authentic brands</Text>
-          <Text style={styles.bulletPoint}>✔️ Handpicked luxury collections</Text>
-          <Text style={styles.bulletPoint}>✔️ Best price guarantee</Text>
-          <Text style={styles.bulletPoint}>✔️ Exceptional customer service</Text>
+          <Text style={styles.bulletPoint}>✔️ **World-Class Craftsmanship**: Immaculately designed watches crafted by the finest artisans.</Text>
+          <Text style={styles.bulletPoint}>✔️ **Timeless Elegance**: Watches that define style and sophistication.</Text>
+          <Text style={styles.bulletPoint}>✔️ **Unrivaled Exclusivity**: A limited selection of only the most coveted brands.</Text>
+          <Text style={styles.bulletPoint}>✔️ **Tailored Experiences**: Personalized service that elevates your luxury journey.</Text>
         </View>
       </View>
 
-      {/* Why Choose Us Section */}
+      {/* Values Section */}
       <View style={styles.card}>
-        <Text style={styles.sectionTitle}>💼 Why Choose Us?</Text>
+        <Text style={styles.sectionTitle}>🏆 Our Core Values</Text>
         <Text style={styles.description}>
-          When you choose Luxury Timepieces, you're not just buying a watch;
-          you're investing in a legacy of class, precision, and sophistication.
-          We curate each piece to ensure it resonates with your style and
-          persona.
+          Every watch in our collection is chosen with utmost care, representing:
         </Text>
+        <View style={styles.bulletPoints}>
+          <Text style={styles.bulletPoint}>🔹 **Legacy**: Honoring centuries of watchmaking excellence.</Text>
+          <Text style={styles.bulletPoint}>🔹 **Innovation**: Melding tradition with cutting-edge technology.</Text>
+          <Text style={styles.bulletPoint}>🔹 **Prestige**: Only the most distinguished brands make it into our collection.</Text>
+        </View>
       </View>
 
-      {/* Footer Section */}
+      {/* Call-to-Action */}
       <View style={styles.footer}>
         <Text style={styles.footerText}>
-          Experience the Art of Luxury. Start Your Journey Today! 🚀
+          *Indulge in the art of horology.* Start your luxurious journey with us today.
         </Text>
       </View>
     </ScrollView>
@@ -67,78 +75,90 @@ const AboutScr = () => {
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
-    padding: 20,
-    backgroundColor: '#E6F7FF',
+    padding: 30,
+    backgroundColor: '#2C3E50', // Dark luxurious background
   },
   header: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 40,
+    marginTop: 20,
   },
   title: {
-    fontSize: 30,
+    fontSize: 40,
     fontWeight: 'bold',
-    color: '#1E90FF',
+    color: '#FFD700', // Rich gold color
     textAlign: 'center',
-    textShadowColor: '#87CEEB',
-    textShadowOffset: { width: 2, height: 2 },
-    textShadowRadius: 4,
+    letterSpacing: 3,
+    fontFamily: 'Playfair Display', // Elegant, luxury font
   },
   subtitle: {
-    fontSize: 18,
-    color: '#555',
+    fontSize: 22,
+    color: '#D1D1D1', // Subtle silver/grey
     marginTop: 10,
     textAlign: 'center',
     fontStyle: 'italic',
+    fontFamily: 'Georgia', // Elegant serif
   },
   card: {
-    backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 15,
-    marginBottom: 20,
-    elevation: 5,
+    backgroundColor: '#1A1A1A', // Dark background for ultra-luxury feel
+    padding: 30,
+    borderRadius: 20,
+    marginBottom: 40,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
+    shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.2,
-    shadowRadius: 5,
+    shadowRadius: 20,
+    elevation: 20,
+    borderWidth: 1,
+    borderColor: '#444', // Subtle borders for elegance
   },
   highlightCard: {
-    backgroundColor: '#FFF3E0',
+    backgroundColor: '#333', // Darker tone for highlights
   },
   sectionTitle: {
-    fontSize: 22,
+    fontSize: 26,
     fontWeight: '600',
-    color: '#1E90FF',
-    marginBottom: 10,
+    color: '#FFD700', // Gold highlights for importance
+    marginBottom: 15,
+    fontFamily: 'Playfair Display',
   },
   highlightTitle: {
-    color: '#FF8C00',
+    color: '#FF5733', // Luxurious copper accent color
   },
   description: {
-    fontSize: 16,
-    lineHeight: 24,
-    color: '#333',
+    fontSize: 18,
+    lineHeight: 28,
+    color: '#D1D1D1',
     textAlign: 'justify',
+    fontFamily: 'Roboto', // Clean and professional for readability
   },
   bulletPoints: {
-    marginVertical: 10,
+    marginVertical: 20,
   },
   bulletPoint: {
-    fontSize: 16,
-    color: '#333',
-    marginBottom: 5,
+    fontSize: 18,
+    color: '#D1D1D1',
+    marginBottom: 12,
+    fontFamily: 'Roboto',
   },
   footer: {
-    marginTop: 20,
-    padding: 15,
-    backgroundColor: '#1E90FF',
-    borderRadius: 15,
+    marginTop: 50,
+    padding: 20,
+    backgroundColor: '#FFD700', // Rich gold for the footer to attract attention
+    borderRadius: 20,
     alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.3,
+    shadowRadius: 15,
+    elevation: 20,
   },
   footerText: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: '600',
-    color: '#FFFFFF',
+    color: '#2C3E50',
     textAlign: 'center',
+    fontFamily: 'Georgia', // Classic font to emphasize luxury
   },
 });
 
