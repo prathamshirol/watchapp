@@ -1,10 +1,10 @@
-// src/screen/contactscr.js
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Animated, TextInput, ScrollView, Alert } from 'react-native';
 
 const ContactScr = ({ navigation }) => {
   const fadeAnim = React.useRef(new Animated.Value(0)).current;
   const [email, setEmail] = useState('');
+  const [feedback, setFeedback] = useState('');
 
   React.useEffect(() => {
     Animated.timing(fadeAnim, {
@@ -17,9 +17,12 @@ const ContactScr = ({ navigation }) => {
   const handleSubmit = () => {
     if (email.trim() === '') {
       Alert.alert('Please enter your email address');
+    } else if (feedback.trim() === '') {
+      Alert.alert('Please provide your feedback');
     } else {
-      Alert.alert('Thank you!', 'We will contact you soon.');
+      Alert.alert('Thank you!', 'We have received your feedback. We will contact you soon.');
       setEmail('');
+      setFeedback('');
     }
   };
 
@@ -48,6 +51,19 @@ const ContactScr = ({ navigation }) => {
           />
         </View>
 
+        {/* Feedback input section */}
+        <View style={styles.formContainer}>
+          <Text style={styles.inputLabel}>Your Feedback</Text>
+          <TextInput
+            style={[styles.textInput, styles.feedbackInput]}
+            placeholder="Enter your feedback"
+            value={feedback}
+            onChangeText={setFeedback}
+            multiline
+            numberOfLines={4}
+          />
+        </View>
+
         {/* Submit Button */}
         <TouchableOpacity
           style={styles.submitButton}
@@ -68,7 +84,7 @@ const styles = StyleSheet.create({
     flexGrow: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f9f9f9', // Light grey background for a clean look
+    backgroundColor: '#1C1C1C', // Dark background for a luxurious touch
   },
   container: {
     flex: 1,
@@ -78,96 +94,89 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   title: {
-    fontSize: 34,
+    fontSize: 36,
     fontWeight: 'bold',
-    color: '#2F4F4F',
+    color: '#FFD700', // Gold for a luxurious feel
     marginBottom: 15,
     textAlign: 'center',
-    textShadowColor: 'rgba(0, 0, 0, 0.2)',
-    textShadowOffset: { width: 1, height: 1 },
-    textShadowRadius: 3,
+    textShadowColor: 'rgba(255, 215, 0, 0.5)',
+    textShadowOffset: { width: 2, height: 2 },
+    textShadowRadius: 10,
   },
   subtitle: {
     fontSize: 18,
-    color: '#333',
+    color: '#E0E0E0', // Light grey for elegance
     marginBottom: 30,
     textAlign: 'center',
   },
   contactDetails: {
     width: '90%',
     padding: 25,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#2C2C2C', // Dark card for contact details
     borderRadius: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
     shadowRadius: 10,
-    elevation: 5,
+    elevation: 10,
     marginBottom: 30,
   },
   contactItem: {
     fontSize: 18,
-    color: '#4682B4',
+    color: '#FFD700', // Gold accents for text
     marginBottom: 15,
     borderBottomWidth: 1,
-    borderBottomColor: '#f0f8ff',
+    borderBottomColor: '#444',
     paddingBottom: 5,
   },
   formContainer: {
     width: '90%',
     padding: 25,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#2C2C2C', // Match the card theme
     borderRadius: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.3,
     shadowRadius: 10,
-    elevation: 5,
+    elevation: 10,
     marginBottom: 30,
   },
   inputLabel: {
     fontSize: 16,
-    color: '#333',
+    color: '#E0E0E0', // Light grey for labels
     marginBottom: 10,
   },
   textInput: {
     height: 50,
-    borderColor: '#4682B4',
+    borderColor: '#FFD700', // Gold border for elegance
     borderWidth: 1,
     borderRadius: 15,
     paddingLeft: 15,
     fontSize: 16,
-    color: '#333',
+    color: '#E0E0E0', // Light text for dark background
+    backgroundColor: '#333', // Dark input field
     marginBottom: 20,
   },
+  feedbackInput: {
+    height: 120, // More height for the feedback input field
+    textAlignVertical: 'top', // Align text to the top of the multiline input
+  },
   submitButton: {
-    backgroundColor: '#32CD32', // Lime Green for a fresh look
+    backgroundColor: '#FFD700', // Luxurious gold button
     padding: 15,
     borderRadius: 25,
     width: '80%',
     alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 6,
+    shadowColor: '#FFD700',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.5,
+    shadowRadius: 10,
+    elevation: 10,
     marginTop: 20,
   },
   buttonText: {
     fontSize: 20,
-    color: '#FFFFFF',
+    color: '#1C1C1C', // Dark text for contrast
     fontWeight: 'bold',
-  },
-  button: {
-    backgroundColor: '#1E90FF', // Blue for the back button
-    padding: 15,
-    borderRadius: 25,
-    width: '80%',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 6,
   },
 });

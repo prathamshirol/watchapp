@@ -31,41 +31,39 @@ const WelcomeScreen = ({ navigation }) => {
       {/* Features Section */}
       <View style={styles.featuresContainer}>
         <Text style={styles.featureTitle}>Why Choose Us?</Text>
-        <View style={styles.featureItem}>
-          <Text style={styles.featureText}>✓ Exclusive Collections</Text>
-        </View>
-        <View style={styles.featureItem}>
-          <Text style={styles.featureText}>✓ Authentic Brands</Text>
-        </View>
-        <View style={styles.featureItem}>
-          <Text style={styles.featureText}>✓ Best Price Guarantee</Text>
-        </View>
+        {['Exclusive Collections', 'Authentic Brands', 'Best Price Guarantee'].map((item, index) => (
+          <View key={index} style={styles.featureItem}>
+            <Text style={styles.featureText}>✓ {item}</Text>
+          </View>
+        ))}
       </View>
 
-      {/* Buttons with Navigation */}
-      <TouchableOpacity
-        style={styles.getStartedButton}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('HOME')}
-      >
-        <Text style={styles.buttonText}>Get Started</Text>
-      </TouchableOpacity>
+      {/* Navigation Buttons */}
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.getStartedButton}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('HOME')}
+        >
+          <Text style={styles.buttonText}>Get Started</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[styles.aboutButton, { marginTop: 20 }]}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('About')}
-      >
-        <Text style={styles.buttonText}>About Us</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.aboutButton}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('About')}
+        >
+          <Text style={styles.buttonText}>About Us</Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity
-        style={[styles.contactButton, { marginTop: 20 }]}
-        activeOpacity={0.8}
-        onPress={() => navigation.navigate('Contact')}
-      >
-        <Text style={styles.buttonText}>Contact Us</Text>
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.contactButton}
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate('Contact')}
+        >
+          <Text style={styles.buttonText}>Contact Us</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -78,7 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#f0f8ff', // Light background color
+    backgroundColor: '#1C1C1C', // Elegant dark background
   },
   titleContainer: {
     alignItems: 'center',
@@ -87,34 +85,34 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 36,
     fontWeight: 'bold',
-    color: '#2F4F4F',
+    color: '#FFD700', // Gold color
     textAlign: 'center',
     marginBottom: 10,
   },
   subtitle: {
     fontSize: 18,
-    color: '#666',
+    color: '#D3D3D3', // Light gray
     textAlign: 'center',
     marginTop: 5,
     fontStyle: 'italic',
   },
   featuresContainer: {
-    marginTop: 30,
+    marginTop: 20,
     width: '90%',
-    padding: 20,
-    backgroundColor: 'rgba(255, 255, 255, 0.9)', // Semi-transparent white
-    borderRadius: 15,
+    padding: 25,
+    backgroundColor: '#2C2C2C', // Slightly lighter dark for contrast
+    borderRadius: 20,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 5 },
+    shadowOffset: { width: 0, height: 10 },
     shadowOpacity: 0.3,
-    shadowRadius: 10,
-    elevation: 5,
+    shadowRadius: 15,
+    elevation: 10,
   },
   featureTitle: {
-    fontSize: 22,
+    fontSize: 24,
     fontWeight: '600',
-    marginBottom: 10,
-    color: '#4682B4',
+    marginBottom: 15,
+    color: '#FFD700', // Gold color for titles
     textAlign: 'center',
   },
   featureItem: {
@@ -122,40 +120,43 @@ const styles = StyleSheet.create({
   },
   featureText: {
     fontSize: 16,
-    color: '#333',
+    color: '#FFFFFF', // White for readability
     textAlign: 'center',
   },
-  getStartedButton: {
+  buttonContainer: {
     marginTop: 40,
-    backgroundColor: '#1E90FF',
+    width: '100%',
+    alignItems: 'center',
+  },
+  getStartedButton: {
+    backgroundColor: '#FFD700', // Gold button
     padding: 15,
     borderRadius: 30,
     elevation: 5,
     width: '80%',
     alignItems: 'center',
-    opacity: 0.9,
+    marginBottom: 20,
   },
   aboutButton: {
-    backgroundColor: '#FF8C00',
+    backgroundColor: '#FFD700',
     padding: 15,
     borderRadius: 30,
     elevation: 5,
     width: '80%',
     alignItems: 'center',
-    opacity: 0.9,
+    marginBottom: 20,
   },
   contactButton: {
-    backgroundColor: '#32CD32', // Lime green
+    backgroundColor: '#FFD700', // Gold for another call-to-action
     padding: 15,
     borderRadius: 30,
     elevation: 5,
     width: '80%',
     alignItems: 'center',
-    opacity: 0.9,
   },
   buttonText: {
     fontSize: 18,
     fontWeight: 'bold',
-    color: '#FFFFFF',
+    color: '#1C1C1C', // Dark background for contrast on buttons
   },
 });
